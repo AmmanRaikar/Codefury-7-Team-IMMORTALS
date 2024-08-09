@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %} Cats {% endblock %}
+{% block content %}
+<h1>
+  Index Page
+</h1>
+<p>
+  This is the index page.
+</p>
+<ul>
+  {% for i in emp %}
+    <li class="bg-blue-500 text-red-500">
+      {{i['Empname']}}:{{i['Empid']}}
+    </li>
+  {% endfor %}
+</ul>
+<a href="{{url_for('other')}}"><button >click</button></a>
+{% endblock %}
