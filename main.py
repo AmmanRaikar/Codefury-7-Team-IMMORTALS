@@ -132,7 +132,7 @@ def location():
 # EDUCATION page links
 @app.route('/edu', methods=['GET'])
 def edu():
-    return render_template("edu.html", pid=pid)
+    return render_template("edu.html")
 
 
 @app.route('/edu/avalanche', methods=['GET'])
@@ -201,7 +201,7 @@ def personal_details():
         f"Include- Name, Age, gender, 2 phone numbers of relatives and address, blood group"
         f", ")
 
-    elif request.metod == "POST":
+    elif request.method == "POST":
         name = request.form["name"] #AutoFilled
         age = request.form["age"]
         gender = request.form["gender"]
@@ -212,6 +212,9 @@ def personal_details():
         connection = get_db_connection()
         cursor = connection.cursor()
         cursor.execute("INSERT INTO emergency (pid, age, gender, phone1, phone2, address_rel, blood_group) VALUES (%s, %s, %s, %s, %s, %s)", (pid_session, age, gender, phone_no1, phone_no2, address_relative, blood_group))
+        return render_template("userscree.html")
+
+    return '<h1>Something Went Wrong</h1>'
         
         
         
