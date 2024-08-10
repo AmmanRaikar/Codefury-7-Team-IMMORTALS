@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time User Location & Nearby Hospitals</title>
+    <style>
+        #map {
+            height: 80%;
+            width: 80%;
+            margin : auto;
+        }
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+    </style>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-5umg1HHsTf26Hm21znFnkb49I1iWLxY&libraries=places&callback=initMap" async defer></script>
+</head>
+<body>
+    <div class="center">
+        <button class="geo-btn">
+            Start Tracking Location
+        </button>
+        <p class="showdetails">User location Details</p>
+    </div>
+    <div id="map"></div>
+
+    <script>
+        let map;
+        let marker;
+        let service;
+        let infowindow;
+
+        function initMap() {
+            // Initialize the map centered at an arbitrary location
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: 0, lng: 0 }, // Start at the equator
+                zoom: 2, // Global view
+            });
+        }
+
+        document.querySelector('.geo-btn').addEventListener('click', () => {
+            const showDetails = document.querySelector('.showdetails');
+
+            if (navigator.geolocation) {
+                navigator.geolocation.watchPosition(
+                    (position) => {
+                        const { latitude, longitude, accuracy } = position.coords;
+
+                        showDetails.textContent = "Latitude: ${latitude}, Longitude: ${longitude}, Accuracy: ${accuracy} meters";
+
+                        const userLocation = new google.maps.LatLng(latitude, longitude);
+
+                        // Update the map and marker to the user's current location
+                        if (!marker) {
+                            marker = new google.maps.Marker({
+                                position: userLocation,
+                                map: map,
+                                title: "You are here",
+                            });
+                        } else {
+                            marker.setPosition(userLocation);
+                        }
+
+                        map.setCenter(userLocation);
+                        map.setZoom(15); // Zoom in to the user's location
+
+                        // Search for nearby hospitals
+                        const request = {
+                            location: userLocation,
+                            radius: '5000', // Search within 5 km radius
+                            type: ['hospital'] // Specify that we are looking for hospitals
+                        };
+
+                        service = new google.maps.places.PlacesService(map);
+                        service.nearbySearch(request, (results, status) => {
+                            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                                for (let i = 0; i < results.length; i++) {
+                                    createMarker(results[i]);
+                                }
+                            }
+                        });
+                    },
+                    (error) => {
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                showDetails.textContent = "User denied the request for Geolocation.";
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                showDetails.textContent = "Location information is unavailable.";
+                                break;
+                            case error.TIMEOUT:
+                                showDetails.textContent = "The request to get user location timed out.";
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                showDetails.textContent = "An unknown error occurred.";
+                                break;
+                        }
+                        console.log(error.message);
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 30000,
+                        maximumAge: 0
+                    }
+                );
+            } else {
+                showDetails.textContent = "Geolocation is not supported by this browser.";
+            }
+        });
+
+        function createMarker(place) {
+            const placeLoc = place.geometry.location;
+            const marker = new google.maps.Marker({
+                map: map,
+                position: placeLoc,
+                title: place.name
+            });
+
+            google.maps.event.addListener(marker, 'click', () => {
+                if (!infowindow) {
+                    infowindow = new google.maps.InfoWindow();
+                }
+                infowindow.setContent(place.name);
+                infowindow.open(map, marker);
+            });
+        }
+    </script>
+</body>
+</html>

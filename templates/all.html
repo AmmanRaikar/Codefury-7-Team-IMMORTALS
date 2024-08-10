@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+  <ul>
+    <li>Username   email   phone   password   location   ID(primary key)</li>
+    {% for row in results %}
+    <li>
+      {{row}}
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

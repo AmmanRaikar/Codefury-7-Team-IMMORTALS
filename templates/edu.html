@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Natural Disasters Education</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+header {
+    background-color:rgb(29, 61, 99);
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+
+main {
+    padding: 20px;
+}
+
+.box-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.box {
+    background-color: #aaaaaa;
+    color: rgb(255, 255, 255);
+    margin: 20px;
+    padding: 40px;
+    text-align: center;
+    height: 180px;
+    width: 220px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    /* border: 2px solid #000; */
+    border-radius: 8px;
+    
+    
+}
+.disName{
+    
+    font-size: 24px;
+    
+}
+.outBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 15px;
+    margin: 15px;
+    
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.2);
+}
+.outBox:hover {
+    transform: scale(1.06);
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Natural Disasters</h1>
+    </header>
+
+    <main>
+        <div class="box-container">
+            <a href="{{url_for('earthquake')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/earthquake.jpeg) "></div>
+                <p class="disName">Earthquakes</p>
+            </div></a>
+            <a href="{{url_for('tsunami')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/tsunami.jpeg) "></div>
+                <p class="disName">Tsunamis</p>
+            </div></a>
+            <a href="{{url_for('hurricane')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/Hurricanes.jpeg) "></div>
+                <p class="disName">Hurricanes</p>
+            </div></a>
+            <a href="{{url_for('flood')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/Floods.jpeg) "></div>
+                <p class="disName">Floods</p>
+            </div></a>
+            <a href="{{url_for('wildfire')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/Wildfires.jpeg) "></div>
+                <p class="disName">Wildfires</p>
+            </div></a>
+            <a href="{{url_for('tornado')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/Tornadoes.jpeg) "> </div>
+                <p class="disName">Tornadoes</p>
+            </div></a>
+            <a href="{{url_for('volcano')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/Volcanic\ Eruptions.jpeg) "></div>
+                <p class="disName">Volcanic Eruptions </p>
+            </div></a>
+            <a href="{{url_for('landslide')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/Landslides.jpeg) "></div>
+                <p class="disName">Landslides</p>
+            </div></a>
+            <a href="{{url_for('drought')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/Droughts.jpeg) "></div>
+                <p class="disName">Droughts</p>
+            </div></a>
+            <a href="{{url_for('avalanche')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/Avalanches.jpeg) "></div>
+                <p class="disName">Avalanches</p>
+            </div></a>
+            <a href="{{url_for('blizzard')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/Blizzards.jpeg) "></div>
+                <p class="disName">Blizzards</p>
+            </div></a>
+            <a href="{{url_for('sandstorm')}}"><div class="outBox">
+                <div class="box" style="background-image: url(/img/Sandstorms\ and\ Dust\ Storms.jpeg) "></div>
+                <p class="disName">Sandstorms and Dust Storms</p>
+            </div></a>
+        </div>
+    </main>
+
+    
+</body>
+</html>
