@@ -3,132 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Real-Time User Location & Nearby Hospitals</title>
+    <title>Location</title>
     <style>
-        #map {
-            height: 80%;
-            width: 80%;
-            margin : auto;
-        }
-        .center {
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            margin-top: 20px;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+        }
+
+        .geo-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .geo-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .showdetails {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        #map {
+            height: 450px;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #e0e0e0; /* Light gray background for better visibility */
         }
     </style>
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA-5umg1HHsTf26Hm21znFnkb49I1iWLxY&libraries=places&callback=initMap" async defer></script>
 </head>
 <body>
-    <div class="center">
-        <button class="geo-btn">
-            Start Tracking Location
-        </button>
+    <div class="container">
+        <button class="geo-btn">Show your location</button>
         <p class="showdetails">User location Details</p>
+        <div id="map">Map will be displayed here.</div>
     </div>
-    <div id="map"></div>
 
     <script>
-        let map;
-        let marker;
-        let service;
-        let infowindow;
-
-        function initMap() {
-            // Initialize the map centered at an arbitrary location
-            map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: 0, lng: 0 }, // Start at the equator
-                zoom: 2, // Global view
-            });
-        }
-
         document.querySelector('.geo-btn').addEventListener('click', () => {
             const showDetails = document.querySelector('.showdetails');
+            const mapDiv = document.getElementById('map');
 
             if (navigator.geolocation) {
-                navigator.geolocation.watchPosition(
+                navigator.geolocation.getCurrentPosition(
                     (position) => {
-                        const { latitude, longitude, accuracy } = position.coords;
+                        const { latitude, longitude } = position.coords;
+                        showDetails.textContent = Latitude: ${latitude}, Longitude: ${longitude};
 
-                        showDetails.textContent = "Latitude: ${latitude}, Longitude: ${longitude}, Accuracy: ${accuracy} meters";
+                        // Create the iframe with dynamic latitude and longitude
+                        const iframeHTML = <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d164705.91674341905!2d${longitude}!3d${latitude}!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bbf669f5095362f%3A0x7e34b31edcdefb5f!2sBelagavi%2C%20Karnataka!5e1!3m2!1sen!2sin!4v1723314265943!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>;
 
-                        const userLocation = new google.maps.LatLng(latitude, longitude);
-
-                        // Update the map and marker to the user's current location
-                        if (!marker) {
-                            marker = new google.maps.Marker({
-                                position: userLocation,
-                                map: map,
-                                title: "You are here",
-                            });
-                        } else {
-                            marker.setPosition(userLocation);
-                        }
-
-                        map.setCenter(userLocation);
-                        map.setZoom(15); // Zoom in to the user's location
-
-                        // Search for nearby hospitals
-                        const request = {
-                            location: userLocation,
-                            radius: '5000', // Search within 5 km radius
-                            type: ['hospital'] // Specify that we are looking for hospitals
-                        };
-
-                        service = new google.maps.places.PlacesService(map);
-                        service.nearbySearch(request, (results, status) => {
-                            if (status === google.maps.places.PlacesServiceStatus.OK) {
-                                for (let i = 0; i < results.length; i++) {
-                                    createMarker(results[i]);
-                                }
-                            }
-                        });
+                        // Insert the iframe into the mapDiv
+                        mapDiv.innerHTML = iframeHTML;
                     },
                     (error) => {
-                        switch (error.code) {
-                            case error.PERMISSION_DENIED:
-                                showDetails.textContent = "User denied the request for Geolocation.";
-                                break;
-                            case error.POSITION_UNAVAILABLE:
-                                showDetails.textContent = "Location information is unavailable.";
-                                break;
-                            case error.TIMEOUT:
-                                showDetails.textContent = "The request to get user location timed out.";
-                                break;
-                            case error.UNKNOWN_ERROR:
-                                showDetails.textContent = "An unknown error occurred.";
-                                break;
-                        }
+                        showDetails.textContent = Error: ${error.message};
                         console.log(error.message);
-                    },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 30000,
-                        maximumAge: 0
                     }
                 );
             } else {
                 showDetails.textContent = "Geolocation is not supported by this browser.";
             }
         });
-
-        function createMarker(place) {
-            const placeLoc = place.geometry.location;
-            const marker = new google.maps.Marker({
-                map: map,
-                position: placeLoc,
-                title: place.name
-            });
-
-            google.maps.event.addListener(marker, 'click', () => {
-                if (!infowindow) {
-                    infowindow = new google.maps.InfoWindow();
-                }
-                infowindow.setContent(place.name);
-                infowindow.open(map, marker);
-            });
-        }
     </script>
 </body>
 </html>

@@ -4,16 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Natural Disaster Management</title>
-     <link rel="stylesheet" type="text/css" href="/styles/styles.css"">
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+    <meta http-equiv="Content-type" content="text/html; ">
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <style>
+        #google_translate_element {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 1000;
+            background-color: #ffffff;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .darkred{
+          text-color:darkred;
+        }
+
+        .darkgreen{
+          text-color: darkgreen;
+        }
+    </style>
 </head>
 <body>
+    <!-- Google Translate Element -->
+    <div id="google_translate_element"></div>
+
     <div class="container">
         <h2>Login</h2>
         <form action="{{ url_for('main') }}" method="GET">
-            {% if email_auth == 0 %}
-                <div>{{err_text}}</div>
-            {% endif %}
             <div class="input-group">
+                {% if email_auth == 0 %}
+                <div class="darkred">{{err_text}}</div>
+                {% elif success %}
+                    <div class="darkgreen">{{text}}</div>
+                {% endif %}
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" required>
             </div>
@@ -21,12 +47,22 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-            
+
             <div class="actions">
                 <button type="submit" class="btn">Login</button>
             </div>
             <p>Don't have an account? <a href="{{url_for('signup')}}">Sign Up</a></p>
         </form>
     </div>
+
+    <script>
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'hi,kn,ta,mr', // Hindi, Kannada, Tamil, Marathi
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
 </body>
 </html>

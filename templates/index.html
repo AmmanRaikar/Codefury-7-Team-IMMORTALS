@@ -4,21 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Natural Disaster Management</title>
-    <link rel="stylesheet" type="text/css" href="/styles/styles.css"">
+    <link rel="stylesheet" type="text/css" href="/styles/login.css">
 </head>
 <body>
-    <div class="header">
+<div class="container1">
+    <div class="navBar">
+        <nav>
+            <ul>
+                <li><a href="{{url_for('index')}}">Home</a></li>
+                <li><a href="{{url_for('location')}}">Location</a></li>
+                <li><a href="{{url_for('signup')}}">Sign Up</a></li>
+                <li><a href="{{url_for('login')}}">Login</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col">
+            <h1>CrisisAware</h1>
+            <p>
+                A sanctuary of hope in times of crisis, a team that cares about the ones in danger, our website connects those in need with immediate aid and resources. Offering guidance, support, and a helping hand to whoever is in need, we are dedicated to bringing comfort and relief when it matters the most.
+            </p>
+            <a href="{{url_for('login')}}"><button>Login</button></a>
+        </div>
+        
+        <div class="col">
+            <div class="card1">
+                <a href="{{url_for('edu')}}"><h5>I'm Here to Learn</h5>
+            </div>
+            <div class="card2" style="background-color:#f223">
+                <h5>EMERGENCY BUTTON</h5>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="header">
         <div class="header-content">
-        <h1>Welcome to...</h1>
         <h1><a href="{{url_for('login')}}" class="btn">LOGIN</a></h1>
         </div>
-    </div>
-    <div class="container">
-        <div class="buttons">
-            <a href="{{url_for('login')}}" class="btn">Login</a>
-            <a href="{{url_for('signup')}}" class="btn">Sign Up</a>
-            <a href="{{url_for('location')}}" class="btn">Location</a>
+    </div> -->
+    <!-- <div class="container">
+        <div class="buttons"> -->
+            <!-- <a href="{{url_for('login')}}" class="btn">Login</a>
+            <a href="{{url_for('signup')}}" class="btn">Sign Up</a> -->
+            <!-- <a href="{{url_for('location')}}" class="btn">Location</a>
         </div>
-    </div>
+    </div>-->
+</div> 
 </body>
 </html>

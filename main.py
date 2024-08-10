@@ -1,5 +1,6 @@
 import mysql.connector
-from flask import Flask, redirect, render_template, request, url_for
+from flask import Flask, render_template, request, session
+from flask_cors import CORS
 
 app = Flask(__name__,
             template_folder="templates",
@@ -43,17 +44,17 @@ def index():
                 return True
 
             if check_email(email, emails):
-                print(f'{email} not in {list(emails)}')
                 cursor.execute(
                     "INSERT INTO users (pname, password, email, phone) VALUES (%s, %s, %s, %s)",
                     (username, password, email, number))
                 connection.commit()
                 connection.close()
-                return render_template('login.html')
+                success_text = "Registration Successful, Please Login"
+                return render_template('login.html', text = success_text, success = True)
 
             elif not check_email(email, emails):
                 email_auth = 0
-                err_text = "Email already signed up, please login"
+                err_text = "Email already registered, please login"
                 connection.close()
                 return render_template("login.html",
                                        err_text=err_text,
@@ -88,16 +89,39 @@ def main():
     connection = get_db_connection()
     cursor = connection.cursor()
     cursor.execute("SELECT pid FROM users WHERE email=%s AND password=%s",
-                   (username, password))
+(username, password))
     pid = cursor.fetchone()
-    print(pid)
     if pid is not None:
-        return render_template("edu.html", pid=pid)
+        global pid_session  
+        pid_session = int(''.join(map(str, pid)))
+        cursor.execute(f"SELECT * FROM users WHERE pid={pid_session}")
+        user_basic_information = cursor.fetchall()
+        return render_template("userscree.html", info = user_basic_information)
+        
 
     elif pid is None:
-        return "<h1>Invalid Credentials</h1>"
+        return render_template("login.html",
+                               err_text="Wrong Credentials",
+                               email_auth=0)
 
     return '<h1>Something went wrong</h1>'
+
+
+@app.route('/userscreen', methods=['GET', 'POST'])
+def userscreen():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM users WHERE pid=%s", (pid_session, ))
+    user_basic_information : list = cursor.fetchall()
+    # print(type(user_basic_information))
+    name = user_basic_information[0][0]
+    email = user_basic_information[0][1]
+    location = user_basic_information[0][4]
+    with open("logs.txt", "a") as f1:
+        f1.write(str(user_basic_information))
+
+    return render_template('userscree.html',
+                           user_basic_information=user_basic_information)
 
 
 @app.route('/location')
@@ -106,77 +130,99 @@ def location():
 
 
 # EDUCATION page links
-@app.route('/edu', methods=['GET', 'POST'])
+@app.route('/edu', methods=['GET'])
 def edu():
-    return render_template("edu.html")
+    return render_template("edu.html", pid=pid)
 
 
-@app.route('/edu/avalanche', methods=['GET', 'POST'])
+@app.route('/edu/avalanche', methods=['GET'])
 def avalanche():
     return render_template("/edu_pages/Avalanches.html")
 
 
-@app.route('/edu/blizzard', methods=['GET', 'POST'])
+@app.route('/edu/blizzard', methods=['GET'])
 def blizzard():
     return render_template("/edu_pages/Blizzards.html")
 
 
-@app.route('/edu/drought', methods=['GET', 'POST'])
+@app.route('/edu/drought', methods=['GET'])
 def drought():
     return render_template("/edu_pages/droughts.html")
 
 
-@app.route('/edu/earthquake', methods=['GET', 'POST'])
+@app.route('/edu/earthquake', methods=['GET'])
 def earthquake():
     return render_template("/edu_pages/Earthquakes.html")
 
 
-@app.route('/edu/flood', methods=['GET', 'POST'])
+@app.route('/edu/flood', methods=['GET'])
 def flood():
     return render_template("/edu_pages/floods.html")
 
 
-@app.route('/edu/hurricane', methods=['GET', 'POST'])
+@app.route('/edu/hurricane', methods=['GET'])
 def hurricane():
     return render_template("/edu_pages/Hurricanes.html")
 
 
-@app.route('/edu/landslide', methods=['GET', 'POST'])
+@app.route('/edu/landslide', methods=['GET'])
 def landslide():
     return render_template("/edu_pages/landslide.html")
 
 
-@app.route('/edu/sandstorm', methods=['GET', 'POST'])
+@app.route('/edu/sandstorm', methods=['GET'])
 def sandstorm():
     return render_template("/edu_pages/Sandstorms.html")
 
 
-@app.route('/edu/tornado', methods=['GET', 'POST'])
+@app.route('/edu/tornado', methods=['GET'])
 def tornado():
     return render_template("/edu_pages/Tornadoes.html")
 
 
-@app.route('/edu/tsunami', methods=['GET', 'POST'])
+@app.route('/edu/tsunami', methods=['GET'])
 def tsunami():
     return render_template("/edu_pages/Tsunamis.html")
 
 
-@app.route('/edu/volcano', methods=['GET', 'POST'])
+@app.route('/edu/volcano', methods=['GET'])
 def volcano():
     return render_template("/edu_pages/volcanic.html")
 
 
-@app.route('/edu/wildfire', methods=['GET', 'POST'])
+@app.route('/edu/wildfire', methods=['GET'])
 def wildfire():
     return render_template("/edu_pages/Wildfires.html")
 
+@app.route('/personal', methods=['GET', 'POST'])
+def personal_details():
+    if request.method == "GET":
+        return (f"enter a web page to enter personal details.\n" 
+        f"Include- Name, Age, gender, 2 phone numbers of relatives and address, blood group"
+        f", ")
+
+    elif request.metod == "POST":
+        name = request.form["name"] #AutoFilled
+        age = request.form["age"]
+        gender = request.form["gender"]
+        phone_no1 = request.form["phone_no1"]
+        phone_no2 = request.form["phone_no2"]
+        address_relative = request.form["address"]
+        blood_group = request.form["blood_group"]
+        connection = get_db_connection()
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO emergency (pid, age, gender, phone1, phone2, address_rel, blood_group) VALUES (%s, %s, %s, %s, %s, %s)", (pid_session, age, gender, phone_no1, phone_no2, address_relative, blood_group))
+        
+        
+        
 
 @app.route('/all')
 def other():
     connection = get_db_connection()
     cursor = connection.cursor()
-    cursor.execute('SELECT * from users')
+    cursor.execute('SELECT * from users where pid = 2')
     results = cursor.fetchall()
+    print(type(results))
     cursor.close()
     connection.close()
     return render_template("all.html", results=results)

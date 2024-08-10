@@ -1,0 +1,1 @@
+[('Aditya Singh', 'adityasingh0705@gmail.com', 7975509823, '123', None, 2)][('Amman Krishna Raikar', 'ammanraikar530@gmail.com', 9480474423, 'Amman3055', None, 1)]
