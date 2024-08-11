@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Location</title>
+    <title>Location & Video Call</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -59,18 +59,27 @@
             background-color: #2c2c2c;
             border: 2px solid #bb86fc;
         }
+
+        #root {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <button class="geo-btn">Show your location</button>
-        <button class="geo-btn">Video Call</button>
+        <button class="geo-btn" id="showLocation">Show your location</button>
+        <button class="geo-btn" id="videoCallButton">Video Call</button>
         <p class="showdetails">User location Details</p>
         <div id="map">Map will be displayed here.</div>
+        <div id="root"></div>
     </div>
 
+    <script src="https://unpkg.com/@zegocloud/zego-uikit-prebuilt/zego-uikit-prebuilt.js"></script>
     <script>
-        document.querySelector('.geo-btn').addEventListener('click', () => {
+        // Function to show the user's location
+        document.getElementById('showLocation').addEventListener('click', () => {
             const showDetails = document.querySelector('.showdetails');
             const mapDiv = document.getElementById('map');
 
@@ -94,6 +103,66 @@
             } else {
                 showDetails.textContent = "Geolocation is not supported by this browser.";
             }
+        });
+
+        // Function to start the video call
+        document.getElementById('videoCallButton').addEventListener('click', () => {
+            function getUrlParams(url) {
+                let urlStr = url.split("?")[1];
+                const urlSearchParams = new URLSearchParams(urlStr);
+                const result = Object.fromEntries(urlSearchParams.entries());
+                return result;
+            }
+
+            const roomID =
+                getUrlParams(window.location.href)["roomID"] ||
+                Math.floor(Math.random() * 10000) + "";
+            const userID = Math.floor(Math.random() * 10000) + "";
+            const userName = "userName" + userID;
+            const appID = 1220183753;
+            const serverSecret = "cc4ea99dc5249738cecda7c3c75c900c";
+            const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
+                appID,
+                serverSecret,
+                roomID,
+                userID,
+                userName,
+            );
+
+            const zp = ZegoUIKitPrebuilt.create(kitToken);
+            zp.joinRoom({
+                container: document.querySelector("#root"),
+                sharedLinks: [
+                    {
+                        name: "Personal link",
+                        url:
+                            window.location.protocol +
+                            "//" +
+                            window.location.host +
+                            window.location.pathname +
+                            "?roomID=" +
+                            roomID,
+                    },
+                ],
+                scenario: {
+                    mode: ZegoUIKitPrebuilt.VideoConference,
+                },
+
+                turnOnMicrophoneWhenJoining: true,
+                turnOnCameraWhenJoining: true,
+                showMyCameraToggleButton: true,
+                showMyMicrophoneToggleButton: true,
+                showAudioVideoSettingsButton: true,
+                showScreenSharingButton: true,
+                showTextChat: true,
+                showUserList: true,
+                maxUsers: 2,
+                layout: "Auto",
+                showLayoutButton: false,
+            });
+
+            // Show the video call container
+            document.getElementById('root').style.display = 'block';
         });
     </script>
 </body>

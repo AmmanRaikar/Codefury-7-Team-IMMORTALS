@@ -211,6 +211,8 @@ def personal_details():
         connection = get_db_connection()
         cursor = connection.cursor()
         cursor.execute("INSERT INTO emergency (pid, age, gender, phone1, phone2, address_rel, blood_group) VALUES (%s, %s, %s, %s, %s, %s)", (pid_session, age, gender, phone_no1, phone_no2, address_relative, blood_group))
+        connection.commit()
+        connection.close()
         return render_template("userscree.html")
 
     return '<h1>Something Went Wrong</h1>'
