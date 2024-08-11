@@ -12,7 +12,7 @@
         <nav>
             <ul>
                 <li><a href="{{url_for('index')}}">Home</a></li>
-                <li><a href="{{url_for('location')}}">Location</a></li>
+                
                 <li><a href="{{url_for('signup')}}">Sign Up</a></li>
                 <li><a href="{{url_for('login')}}">Login</a></li>
             </ul>
@@ -26,14 +26,15 @@
             </p>
             <a href="{{url_for('login')}}"><button>Login</button></a>
         </div>
-        
+
+
         <div class="col">
             <a href="{{url_for('edu')}}" ><div class="card1" style="background-image:url(/img/edu-img.jpeg)">
-                <h5></h5>
+                <h5 class="hidTxt1"></h5>
             </div>
             </a>
-            <div class="card2" style="background-color:#f223; background-image:url(/img/emergency.jpeg);">
-                <h5></h5>
+            <a href="{{url_for('location')}}" ><div class="card2" style="background-color:#f223; background-image:url(/img/emergency.jpeg);">
+                <h5 class="hidTxt2"></h5>
             </div>
         </div>
     </div>

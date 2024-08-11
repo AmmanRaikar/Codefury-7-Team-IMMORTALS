@@ -1,180 +1,271 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Natural Disasters: Learn About Earthquakes, Tsunamis, Hurricanes & More</title>
-    <meta name="description" content="Explore detailed information about various natural disasters including earthquakes, tsunamis, hurricanes, floods, and more. Learn how to stay safe and prepared.">
-    <meta name="keywords" content="Natural Disasters, Earthquakes, Tsunamis, Hurricanes, Floods, Wildfires, Tornadoes, Volcanic Eruptions, Landslides, Droughts, Avalanches, Blizzards, Sandstorms, Dust Storms">
-    <meta name="author" content="Your Name or Organization">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>
+            Natural Disasters: Learn About Earthquakes, Tsunamis, Hurricanes &
+            More
+        </title>
+        <meta
+            name="description"
+            content="Explore detailed information about various natural disasters including earthquakes, tsunamis, hurricanes, floods, and more. Learn how to stay safe and prepared."
+        />
+        <meta
+            name="keywords"
+            content="Natural Disasters, Earthquakes, Tsunamis, Hurricanes, Floods, Wildfires, Tornadoes, Volcanic Eruptions, Landslides, Droughts, Avalanches, Blizzards, Sandstorms, Dust Storms"
+        />
+        <meta name="author" content="Your Name or Organization" />
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff;
-        }
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #ffffff;
+            }
 
-        header {
-            background-color: rgb(29, 61, 99);
-            color: white;
-            padding: 10px 0;
-            text-align: center;
-        }
+            header {
+                background-color: rgb(29, 61, 99);
+                color: white;
+                padding: 10px 0;
+                text-align: center;
+            }
 
-        main {
-            padding: 20px;
-            text-align: center;
-        }
+            main {
+                padding: 20px;
+                text-align: center;
+            }
 
-        h2 {
-            color: rgb(29, 61, 99);
-            font-size: 28px;
-            margin-bottom: 20px;
-        }
+            h2 {
+                color: rgb(29, 61, 99);
+                font-size: 28px;
+                margin-bottom: 20px;
+            }
 
-        .search-box {
-            margin-bottom: 40px;
-        }
+            .search-box {
+                margin-bottom: 40px;
+            }
 
-        input[type="text"] {
-            padding: 10px;
-            width: 80%;
-            max-width: 400px;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            margin-bottom: 20px;
-        }
+            input[type="text"] {
+                padding: 10px;
+                width: 80%;
+                max-width: 400px;
+                font-size: 16px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                margin-bottom: 20px;
+            }
 
-        .box-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
-            gap: 3vw;
-            margin: 0 auto;
-            max-width: 1200px;
-        }
+            .box-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(25vw, 1fr));
+                gap: 3vw;
+                margin: 0 auto;
+                max-width: 1200px;
+            }
 
-        .outBox {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            background-color: #fff;
-            height: 50vh;
-            width: 100%;
-            border-radius: 15px;
-            margin: 15px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
-            text-decoration: none;
-            color: inherit;
-        }
+            .outBox {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #fff;
+                height: 50vh;
+                height: auto;
+                width: 100%;
+                max-width: 800px;
+                border-radius: 15px;
+                margin: 15px;
+                transition: transform 0.3s ease;
+                box-shadow:
+                    0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                    0 6px 20px 0 rgba(0, 0, 0, 0.2);
+                text-decoration: none;
+                color: inherit;
+                overflow: hidden;
+            }
 
-        .outBox:hover {
-            transform: scale(1.06);
-        }
+            .outBox:hover {
+                transform: scale(1.06);
+            }
 
-        .box {
-            margin: 20px;
-            padding: 40px;
-            text-align: center;
-            height: 100%;
-            width: 20vw;
-            background-repeat: no-repeat;
-            background-size: cover;
-            overflow: hidden;
-            border-radius: 8px;
-        }
+            .box {
+                margin: 20px;
+                padding: 40px;
+                text-align: center;
+                height: 50vh;
+                width: 20vw;
+                background-repeat: no-repeat;
+                background-size: cover;
+                overflow: hidden;
+                border-radius: 8px;
+            }
 
-        .disName {
-            font-size: 24px;
-            color: #333;
-            margin-top: 10px;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Natural Disasters</h1>
-    </header>
+            .disName {
+                font-size: 24px;
+                color: #333;
+                margin-top: 10px;
+            }
+        </style>
+        <script
+            type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+        ></script>
+    </head>
+    <body>
+        <header>
+            <div id="google_translate_element"></div>
+            <h1>Natural Disasters</h1>
+        </header>
+        <script>
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement(
+                    {
+                        pageLanguage: "en",
+                        includedLanguages: "hi,kn,ta,mr", // Hindi, Kannada, Tamil, Marathi
+                        layout: google.translate.TranslateElement.InlineLayout
+                            .SIMPLE,
+                    },
+                    "google_translate_element",
+                );
+            }
+        </script>
 
-    <main>
-        <h2>Learn About Various Natural Disasters</h2>
+        <main>
+            <h2>Learn About Various Natural Disasters</h2>
 
-        <!-- Search Box -->
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search for a natural disaster...">
-        </div>
+            <!-- Search Box -->
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search for a natural disaster..."
+                />
+            </div>
 
-        <div class="box-container" id="boxContainer">
-            <a href="{{url_for('earthquake')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/earthquake.jpeg);" alt="Earthquake"></div>
-                <p class="disName">Earthquakes</p>
-            </a>
-            <a href="{{url_for('tsunami')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/tsunami.jpeg);" alt="Tsunami"></div>
-                <p class="disName">Tsunamis</p>
-            </a>
-            <a href="{{url_for('hurricane')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/Hurricanes.jpeg);" alt="Hurricane"></div>
-                <p class="disName">Hurricanes</p>
-            </a>
-            <a href="{{url_for('flood')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/Floods.jpeg);" alt="Flood"></div>
-                <p class="disName">Floods</p>
-            </a>
-            <a href="{{url_for('wildfire')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/Wildfires.jpeg);" alt="Wildfire"></div>
-                <p class="disName">Wildfires</p>
-            </a>
-            <a href="{{url_for('tornado')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/Tornadoes.jpeg);" alt="Tornado"></div>
-                <p class="disName">Tornadoes</p>
-            </a>
-            <a href="{{url_for('volcano')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/Volcanic%20Eruptions.jpeg);" alt="Volcanic Eruption"></div>
-                <p class="disName">Volcanic Eruptions</p>
-            </a>
-            <a href="{{url_for('landslide')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/Landslides.jpeg);" alt="Landslide"></div>
-                <p class="disName">Landslides</p>
-            </a>
-            <a href="{{url_for('drought')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/Droughts.jpeg);" alt="Drought"></div>
-                <p class="disName">Droughts</p>
-            </a>
-            <a href="{{url_for('avalanche')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/Avalanches.jpeg);" alt="Avalanche"></div>
-                <p class="disName">Avalanches</p>
-            </a>
-            <a href="{{url_for('blizzard')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/Blizzards.jpeg);" alt="Blizzard"></div>
-                <p class="disName">Blizzards</p>
-            </a>
-            <a href="{{url_for('sandstorm')}}" class="outBox">
-                <div class="box" style="background-image: url(/img/Sandstorms%20and%20Dust%20Storms.jpeg);" alt="Sandstorm and Dust Storm"></div>
-                <p class="disName">Sandstorms and Dust Storms</p>
-            </a>
-        </div>
-    </main>
+            <div class="box-container" id="boxContainer">
+                <a href="{{url_for('earthquake')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="background-image: url(/img/earthquake.jpeg)"
+                        alt="Earthquake"
+                    ></div>
+                    <p class="disName">Earthquakes</p>
+                </a>
+                <a href="{{url_for('tsunami')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="background-image: url(/img/tsunami.jpeg)"
+                        alt="Tsunami"
+                    ></div>
+                    <p class="disName">Tsunamis</p>
+                </a>
+                <a href="{{url_for('hurricane')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="background-image: url(/img/Hurricanes.jpeg)"
+                        alt="Hurricane"
+                    ></div>
+                    <p class="disName">Hurricanes</p>
+                </a>
+                <a href="{{url_for('flood')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="background-image: url(/img/Floods.jpeg)"
+                        alt="Flood"
+                    ></div>
+                    <p class="disName">Floods</p>
+                </a>
+                <a href="{{url_for('wildfire')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="background-image: url(/img/Wildfires.jpeg)"
+                        alt="Wildfire"
+                    ></div>
+                    <p class="disName">Wildfires</p>
+                </a>
+                <a href="{{url_for('tornado')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="background-image: url(/img/Tornadoes.jpeg)"
+                        alt="Tornado"
+                    ></div>
+                    <p class="disName">Tornadoes</p>
+                </a>
+                <a href="{{url_for('volcano')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="
+                            background-image: url(/img/Volcanic%20Eruptions.jpeg);
+                        "
+                        alt="Volcanic Eruption"
+                    ></div>
+                    <p class="disName">Volcanic Eruptions</p>
+                </a>
+                <a href="{{url_for('landslide')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="background-image: url(/img/Landslides.jpeg)"
+                        alt="Landslide"
+                    ></div>
+                    <p class="disName">Landslides</p>
+                </a>
+                <a href="{{url_for('drought')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="background-image: url(/img/Droughts.jpeg)"
+                        alt="Drought"
+                    ></div>
+                    <p class="disName">Droughts</p>
+                </a>
+                <a href="{{url_for('avalanche')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="background-image: url(/img/Avalanches.jpeg)"
+                        alt="Avalanche"
+                    ></div>
+                    <p class="disName">Avalanches</p>
+                </a>
+                <a href="{{url_for('blizzard')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="background-image: url(/img/Blizzards.jpeg)"
+                        alt="Blizzard"
+                    ></div>
+                    <p class="disName">Blizzards</p>
+                </a>
+                <a href="{{url_for('sandstorm')}}" class="outBox">
+                    <div
+                        class="box"
+                        style="
+                            background-image: url(/img/Sandstorms%20and%20Dust%20Storms.jpeg);
+                        "
+                        alt="Sandstorm and Dust Storm"
+                    ></div>
+                    <p class="disName">Sandstorms and Dust Storms</p>
+                </a>
+            </div>
+        </main>
 
-    <script>
-        const searchInput = document.getElementById('searchInput');
-        const boxContainer = document.getElementById('boxContainer');
-        const boxes = boxContainer.getElementsByClassName('outBox');
+        <script>
+            const searchInput = document.getElementById("searchInput");
+            const boxContainer = document.getElementById("boxContainer");
+            const boxes = boxContainer.getElementsByClassName("outBox");
 
-        searchInput.addEventListener('input', function() {
-            const filter = searchInput.value.toLowerCase();
-            Array.from(boxes).forEach(box => {
-                const disName = box.querySelector('.disName').textContent.toLowerCase();
-                if (disName.includes(filter)) {
-                    box.style.display = 'block';
-                } else {
-                    box.style.display = 'none';
-                }
+            searchInput.addEventListener("input", function () {
+                const filter = searchInput.value.toLowerCase();
+                Array.from(boxes).forEach((box) => {
+                    const disName = box
+                        .querySelector(".disName")
+                        .textContent.toLowerCase();
+                    if (disName.includes(filter)) {
+                        box.style.display = "block";
+                    } else {
+                        box.style.display = "none";
+                    }
+                });
             });
-        });
-    </script>
-</body>
-</html>04@
+        </script>
+    </body>
+</html>
+04@

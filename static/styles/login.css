@@ -109,11 +109,36 @@ button{
   background-size: cover;
   transition: transform 0.3s ease;
 }
+
+.card1 .hidTxt1{
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.card1:hover .hidTxt1{
+opacity: 1;
+}
+.card2 .hidTxt2{
+opacity: 0;
+transition: opacity 0.3s ease;
+}
+.card2:hover .hidTxt2{
+opacity: 1;
+}
 .card1:hover{
-  transform: scale(1.06);
+transform: scale(1.06);
+background-image:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(edu-img.jpeg);
 }
 .card2:hover {
-  transform: scale(1.06);
+transform: scale(1.06);
+background-image: linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(emergency.jpeg);
+
+}
+
+button:hover {
+    background-color: white;
+    color: #007BFF;
+    border-color: #007BFF;
+    transform: scale(1.1);
 }
 /* .header{
   position: absolute;
@@ -210,3 +235,5 @@ p a {
 p a:hover {
   text-decoration: underline;
 } */
+
+

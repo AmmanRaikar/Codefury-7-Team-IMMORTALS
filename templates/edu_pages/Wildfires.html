@@ -1,162 +1,259 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wildfire Information</title>
-    <style>
-        
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f9f9f9;
-    color: #333;
-}
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Wildfire Information</title>
+        <script
+            type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+        ></script>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                margin: 0;
+                padding: 0;
+                background-color: #f9f9f9;
+                color: #333;
+            }
 
+            header {
+                background-color: #ff5722;
+                color: white;
+                padding: 20px 0;
+                text-align: center;
+            }
 
-header {
-    background-color: #ff5722;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
+            header h1 {
+                margin: 0;
+                font-size: 2.5em;
+            }
 
-header h1 {
-    margin: 0;
-    font-size: 2.5em;
-}
+            main {
+                padding: 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+            }
 
+            section {
+                margin-bottom: 40px;
+            }
 
-main {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+            section h2 {
+                font-size: 2em;
+                border-bottom: 2px solid #ff5722;
+                padding-bottom: 10px;
+                margin-bottom: 20px;
+            }
 
+            section p,
+            section ul,
+            section ol {
+                line-height: 1.6;
+                font-size: 1.1em;
+            }
 
-section {
-    margin-bottom: 40px;
-}
+            ul,
+            ol {
+                margin-left: 20px;
+            }
 
-section h2 {
-    font-size: 2em;
-    border-bottom: 2px solid #ff5722;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-}
+            ul li,
+            ol li {
+                margin-bottom: 10px;
+            }
 
-section p,
-section ul,
-section ol {
-    line-height: 1.6;
-    font-size: 1.1em;
-}
+            .responsive-img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+                margin: 20px 0;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
 
+            a {
+                color: #d32f2f;
+                text-decoration: none;
+            }
 
-ul, ol {
-    margin-left: 20px;
-}
+            a:hover {
+                text-decoration: underline;
+            }
 
-ul li, ol li {
-    margin-bottom: 10px;
-}
+            footer {
+                background-color: #333;
+                color: white;
+                text-align: center;
+                padding: 20px 0;
+                position: relative;
+                bottom: 0;
+                width: 100%;
+            }
 
+            footer p {
+                margin: 0;
+                font-size: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <div id="google_translate_element"></div>
+            <h1>Understanding Wildfires</h1>
+        </header>
+        <script>
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement(
+                    {
+                        pageLanguage: "en",
+                        includedLanguages: "hi,kn,ta,mr", // Hindi, Kannada, Tamil, Marathi
+                        layout: google.translate.TranslateElement.InlineLayout
+                            .SIMPLE,
+                    },
+                    "google_translate_element",
+                );
+            }
+        </script>
 
-.responsive-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 20px 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        <main>
+            <section class="safety-tips">
+                <h2>Wildfire Safety Tips</h2>
+                <p>
+                    Preparation and awareness are key to staying safe during a
+                    wildfire:
+                </p>
+                <ol>
+                    <li>
+                        <strong>Create a Defensible Space:</strong> Maintain a
+                        clear area around your home free of flammable materials,
+                        such as dry leaves and dead vegetation.
+                    </li>
+                    <li>
+                        <strong>Prepare an Emergency Kit:</strong> Include
+                        essentials like water, non-perishable food, medications,
+                        important documents, and protective clothing.
+                    </li>
+                    <li>
+                        <strong>Know Your Evacuation Plan:</strong> Be familiar
+                        with evacuation routes and have a plan in place in case
+                        you need to leave quickly.
+                    </li>
+                    <li>
+                        <strong>Stay Informed:</strong> Monitor local news and
+                        weather reports for wildfire warnings and updates.
+                    </li>
+                    <li>
+                        <strong>During a Wildfire:</strong> If authorities order
+                        an evacuation, leave immediately. Do not attempt to stay
+                        and defend your property.
+                    </li>
+                </ol>
+            </section>
 
+            <section class="intro">
+                <h2>What is a Wildfire?</h2>
+                <p>
+                    A wildfire is an uncontrolled fire that spreads rapidly
+                    across vegetation, often in areas of grassland, forests, or
+                    other types of woodland. Wildfires can cause extensive
+                    damage to natural habitats, human properties, and can even
+                    result in loss of life. These fires can be caused by natural
+                    occurrences like lightning strikes or human activities such
+                    as campfires or discarded cigarette butts.
+                </p>
+                <img
+                    src="/img/Wildfires.jpeg"
+                    alt="Wildfire"
+                    class="responsive-img"
+                />
+            </section>
 
-a {
-    color: #d32f2f;
-    text-decoration: none;
-}
+            <section class="causes">
+                <h2>Causes of Wildfires</h2>
+                <ul>
+                    <li>
+                        <strong>Lightning:</strong> Lightning strikes are a
+                        common natural cause of wildfires, particularly in dry
+                        regions.
+                    </li>
+                    <li>
+                        <strong>Human Activities:</strong> Activities such as
+                        unattended campfires, discarded cigarettes, and arson
+                        can lead to wildfires.
+                    </li>
+                    <li>
+                        <strong>Dry Conditions:</strong> Prolonged periods of
+                        drought and dry conditions make forests and grasslands
+                        more susceptible to wildfires.
+                    </li>
+                    <li>
+                        <strong>Wind:</strong> Wind can carry embers from one
+                        location to another, rapidly spreading a fire across
+                        large areas.
+                    </li>
+                </ul>
+            </section>
 
-a:hover {
-    text-decoration: underline;
-}
+            <section class="effects">
+                <h2>Effects of Wildfires</h2>
+                <p>
+                    Wildfires can have devastating effects on the environment,
+                    economy, and human health:
+                </p>
+                <ul>
+                    <li>
+                        <strong>Destruction of Habitats:</strong> Wildfires can
+                        destroy entire ecosystems, displacing wildlife and
+                        disrupting biodiversity.
+                    </li>
+                    <li>
+                        <strong>Property Damage:</strong> Homes, businesses, and
+                        infrastructure can be completely destroyed by wildfires.
+                    </li>
+                    <li>
+                        <strong>Air Quality:</strong> Smoke from wildfires can
+                        lead to poor air quality, causing respiratory issues for
+                        people living nearby.
+                    </li>
+                    <li>
+                        <strong>Loss of Life:</strong> Wildfires can result in
+                        fatalities, particularly for those who are unable to
+                        evacuate in time.
+                    </li>
+                </ul>
+            </section>
 
-
-footer {
-    background-color: #333;
-    color: white;
-    text-align: center;
-    padding: 20px 0;
-    position: relative;
-    bottom: 0;
-    width: 100%;
-}
-
-footer p {
-    margin: 0;
-    font-size: 1em;
-}
-
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Understanding Wildfires</h1>
-    </header>
-
-    <main>
-
-        <section class="safety-tips">
-            <h2>Wildfire Safety Tips</h2>
-            <p>Preparation and awareness are key to staying safe during a wildfire:</p>
-            <ol>
-                <li><strong>Create a Defensible Space:</strong> Maintain a clear area around your home free of flammable materials, such as dry leaves and dead vegetation.</li>
-                <li><strong>Prepare an Emergency Kit:</strong> Include essentials like water, non-perishable food, medications, important documents, and protective clothing.</li>
-                <li><strong>Know Your Evacuation Plan:</strong> Be familiar with evacuation routes and have a plan in place in case you need to leave quickly.</li>
-                <li><strong>Stay Informed:</strong> Monitor local news and weather reports for wildfire warnings and updates.</li>
-                <li><strong>During a Wildfire:</strong> If authorities order an evacuation, leave immediately. Do not attempt to stay and defend your property.</li>
-            </ol>
-        </section>
-        
-        <section class="intro">
-            <h2>What is a Wildfire?</h2>
-            <p>A wildfire is an uncontrolled fire that spreads rapidly across vegetation, often in areas of grassland, forests, or other types of woodland. Wildfires can cause extensive damage to natural habitats, human properties, and can even result in loss of life. These fires can be caused by natural occurrences like lightning strikes or human activities such as campfires or discarded cigarette butts.</p>
-            <img src="/img/Wildfires.jpeg" alt="Wildfire" class="responsive-img">
-        </section>
-
-        
-        <section class="causes">
-            <h2>Causes of Wildfires</h2>
-            <ul>
-                <li><strong>Lightning:</strong> Lightning strikes are a common natural cause of wildfires, particularly in dry regions.</li>
-                <li><strong>Human Activities:</strong> Activities such as unattended campfires, discarded cigarettes, and arson can lead to wildfires.</li>
-                <li><strong>Dry Conditions:</strong> Prolonged periods of drought and dry conditions make forests and grasslands more susceptible to wildfires.</li>
-                <li><strong>Wind:</strong> Wind can carry embers from one location to another, rapidly spreading a fire across large areas.</li>
-            </ul>
-        </section>
-
-        
-        <section class="effects">
-            <h2>Effects of Wildfires</h2>
-            <p>Wildfires can have devastating effects on the environment, economy, and human health:</p>
-            <ul>
-                <li><strong>Destruction of Habitats:</strong> Wildfires can destroy entire ecosystems, displacing wildlife and disrupting biodiversity.</li>
-                <li><strong>Property Damage:</strong> Homes, businesses, and infrastructure can be completely destroyed by wildfires.</li>
-                <li><strong>Air Quality:</strong> Smoke from wildfires can lead to poor air quality, causing respiratory issues for people living nearby.</li>
-                <li><strong>Loss of Life:</strong> Wildfires can result in fatalities, particularly for those who are unable to evacuate in time.</li>
-            </ul>
-        </section>
-        
-        <section class="resources">
-            <h2>Additional Resources</h2>
-            <p>For more information about wildfires, explore these resources:</p>
-            <ul>
-                <li><a href="https://www.ready.gov/wildfires" target="_blank">Ready.gov - Wildfires</a></li>
-                <li><a href="https://www.nifc.gov/fire-information" target="_blank">National Interagency Fire Center</a></li>
-                <li><a href="https://www.cdc.gov/disasters/wildfires/index.html" target="_blank">CDC - Wildfires</a></li>
-            </ul>
-        </section>
-    </main>
-</body>
+            <section class="resources">
+                <h2>Additional Resources</h2>
+                <p>
+                    For more information about wildfires, explore these
+                    resources:
+                </p>
+                <ul>
+                    <li>
+                        <a
+                            href="https://www.ready.gov/wildfires"
+                            target="_blank"
+                            >Ready.gov - Wildfires</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.nifc.gov/fire-information"
+                            target="_blank"
+                            >National Interagency Fire Center</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://www.cdc.gov/disasters/wildfires/index.html"
+                            target="_blank"
+                            >CDC - Wildfires</a
+                        >
+                    </li>
+                </ul>
+            </section>
+        </main>
+    </body>
 </html>

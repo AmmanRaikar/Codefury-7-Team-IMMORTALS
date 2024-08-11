@@ -1,13 +1,13 @@
 import mysql.connector
 from flask import Flask, render_template, request, session
 from flask_cors import CORS
+from flask_mail import Mail, Message
 
 app = Flask(__name__,
             template_folder="templates",
             static_folder="static",
             static_url_path='/')
 app.secret_key = "IMMORTALS"
-
 
 def get_db_connection():
     connection = mysql.connector.connect(host="sql12.freemysqlhosting.net",
@@ -197,18 +197,17 @@ def wildfire():
 @app.route('/personal', methods=['GET', 'POST'])
 def personal_details():
     if request.method == "GET":
-        return (f"enter a web page to enter personal details.\n" 
-        f"Include- Name, Age, gender, 2 phone numbers of relatives and address, blood group"
-        f", ")
+        return render_template("p_d.html")
 
     elif request.method == "POST":
         name = request.form["name"] #AutoFilled
-        age = request.form["age"]
+        age = request.form["dob"]
+        email = request.form["email"]
         gender = request.form["gender"]
-        phone_no1 = request.form["phone_no1"]
-        phone_no2 = request.form["phone_no2"]
+        phone_no1 = request.form["phone1"]
+        phone_no2 = request.form["phone2"]
         address_relative = request.form["address"]
-        blood_group = request.form["blood_group"]
+        blood_group = request.form["blood-grp"]
         connection = get_db_connection()
         cursor = connection.cursor()
         cursor.execute("INSERT INTO emergency (pid, age, gender, phone1, phone2, address_rel, blood_group) VALUES (%s, %s, %s, %s, %s, %s)", (pid_session, age, gender, phone_no1, phone_no2, address_relative, blood_group))

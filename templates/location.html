@@ -7,7 +7,8 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #121212;
+            color: #e0e0e0;
             margin: 0;
             padding: 0;
             display: flex;
@@ -18,17 +19,17 @@
         }
 
         .container {
-            background-color: white;
+            background-color: #1f1f1f;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5);
             width: 80%;
             max-width: 800px;
             margin: auto;
         }
 
         .geo-btn {
-            background-color: #007BFF;
+            background-color: #6200ea;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -36,17 +37,18 @@
             cursor: pointer;
             font-size: 16px;
             margin-bottom: 20px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .geo-btn:hover {
-            background-color: #0056b3;
+            background-color: #3700b3;
+            transform: scale(1.05);
         }
 
         .showdetails {
             font-size: 16px;
             margin-bottom: 20px;
-            color: #555;
+            color: #bb86fc;
         }
 
         #map {
@@ -54,13 +56,15 @@
             width: 100%;
             border-radius: 10px;
             overflow: hidden;
-            background-color: #e0e0e0; /* Light gray background for better visibility */
+            background-color: #2c2c2c;
+            border: 2px solid #bb86fc;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <button class="geo-btn">Show your location</button>
+        <button class="geo-btn">Video Call</button>
         <p class="showdetails">User location Details</p>
         <div id="map">Map will be displayed here.</div>
     </div>
