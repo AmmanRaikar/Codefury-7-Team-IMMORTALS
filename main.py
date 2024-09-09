@@ -127,7 +127,7 @@ def userscreen():
 
 @app.route('/location')
 def location():
-    return render_template("location.html")
+    return render_template("trialmap.html")
 
 
 # EDUCATION page links
@@ -264,4 +264,4 @@ def other():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
