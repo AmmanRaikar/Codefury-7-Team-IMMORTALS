@@ -95,8 +95,9 @@ def main():
         global pid_session  
         pid_session = int(''.join(map(str, pid)))
         cursor.execute(f"SELECT * FROM users WHERE pid={pid_session}")
-        user_basic_information = cursor.fetchall()
-        return render_template("userscree.html", info = user_basic_information)
+        user_basic_information: list = cursor.fetchall()
+        return render_template("userscree.html", info =
+                               user_basic_information[0][0]) 
         
 
     elif pid is None:
@@ -111,7 +112,7 @@ def main():
 def userscreen():
     connection = get_db_connection()
     cursor = connection.cursor()
-    cursor.execute("SELECT * FROM users WHERE pid=%s", (pid_session, ))
+    cursor.execute("SELECT * FROM users WHERE pid=%s", (pid_session,))
     user_basic_information : list = cursor.fetchall()
     # print(type(user_basic_information))
     name = user_basic_information[0][0]
@@ -196,10 +197,18 @@ def wildfire():
 
 @app.route('/personal', methods=['GET', 'POST'])
 def personal_details():
+    print(request.method, "pid:", pid_session)
     if request.method == "GET":
-        return render_template("p_d.html")
+        connection = get_db_connection()
+        cursor = connection.cursor()
+        cursor.execute("SELECT * FROM users WHERE pid=%s", (pid_session,))
+        emergency_details :list = cursor.fetchall()
+        name = emergency_details[0][0]
+        email = emergency_details[0][1]
+        return render_template("p_d.html", name=name, email=email)
 
     elif request.method == "POST":
+        
         name = request.form["name"] #AutoFilled
         age = request.form["dob"]
         email = request.form["email"]
@@ -210,14 +219,36 @@ def personal_details():
         blood_group = request.form["blood-grp"]
         connection = get_db_connection()
         cursor = connection.cursor()
-        cursor.execute("INSERT INTO emergency (pid, age, gender, phone1, phone2, address_rel, blood_group) VALUES (%s, %s, %s, %s, %s, %s)", (pid_session, age, gender, phone_no1, phone_no2, address_relative, blood_group))
+        cursor.execute("INSERT INTO emergency (pid, age, gender, phone1, phone2, address_rel, blood) VALUES (%s, %s, %s, %s, %s, %s, %s)", (pid_session, age, gender, phone_no1, phone_no2, address_relative, blood_group))
+        cursor.execute("SELECT * FROM users WHERE pid=%s", (pid_session,))
+        user_basic_information : list= cursor.fetchall()
+        info = user_basic_information[0][0]
         connection.commit()
         connection.close()
-        return render_template("userscree.html")
+        return render_template("userscree.html", info = info)
 
     return '<h1>Something Went Wrong</h1>'
         
-        
+
+@app.route('/send', methods=['GET', 'POST'])
+def send_info():
+    connection = get_db_connection()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM users WHERE pid=%s", (pid_session,))
+    result : list = cursor.fetchall()
+    receiver_name = result[0][0]
+    receiver_email = result[0][1]
+    receiver_num = result[0][2]
+    sender_email = "help.crisisaware@gmail.com"
+    sender_pass = "crisis@connect007"
+    import smtplib
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    s.starttls()
+    s.login(sender_email, sender_pass)
+    message = "Message_you_need_to_send"
+    s.sendmail(sender_email, receiver_email, message)
+    s.quit()
+    return "mail sent"
         
 
 @app.route('/all')
@@ -226,7 +257,7 @@ def other():
     cursor = connection.cursor()
     cursor.execute('SELECT * from users where pid = 2')
     results = cursor.fetchall()
-    print(type(results))
+    print(results)
     cursor.close()
     connection.close()
     return render_template("all.html", results=results)
